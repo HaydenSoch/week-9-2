@@ -13,7 +13,12 @@
 const ctx = new AudioContext();
  
 
-const osc1 = new OscillatorNode(ctx);
+let osc1, mod, modfreq
+document.querySelector("#Start1").onclick = () =>
+
+{
+
+osc1 = new OscillatorNode(ctx);
 osc1.frequency.value = 220;
 osc1.type = "triangle";
 
@@ -21,13 +26,13 @@ const osc1Gain = new GainNode(ctx);
 osc1Gain.gain.value = 0.1;
 
 
-const mod = new OscillatorNode(ctx);
+mod = new OscillatorNode(ctx);
 mod.type = "sine"
-mod.frequency.value = 48; // what happens if you push this above 20Hz?
+mod.frequency.value = 120; // what happens if you push this above 20Hz?
 
-const modfreq = new OscillatorNode(ctx);
-modfreq.type = "sawtooth"
-modfreq.frequency.value = 2
+modfreq = new OscillatorNode(ctx);
+modfreq.type = "triangle"
+modfreq.frequency.value = 20
 
 const modfreqGain = new GainNode(ctx);
 modfreqGain.gain.value = 128 
@@ -48,6 +53,19 @@ modGain.connect(osc1Gain.gain);
 osc1.start();
 mod.start();
 modfreq.start();
+
+}
+
+
+document.querySelector("#Stop1").onclick = () =>
+
+{
+
+osc1.stop();
+mod.stop();
+modfreq.stop();
+
+}
 
 </script>
 
